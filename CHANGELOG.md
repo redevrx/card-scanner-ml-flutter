@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.3
+- Updated iOS dependencies to resolve version conflicts with Firebase and Google Sign-In
+- Updated GoogleMLKit/TextRecognition to version ~> 3.2.0 for better compatibility
+- Updated minimum iOS deployment target to 12.0 in podspec to match README requirements
+- Improved iOS simulator architecture support for Apple Silicon Macs
+
 ## 1.0.2
 - upgraded gradle versions and compatibility versions to support newer versions of dart & flutter sdk
 
