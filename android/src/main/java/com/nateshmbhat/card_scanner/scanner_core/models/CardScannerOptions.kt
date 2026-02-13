@@ -72,7 +72,7 @@ data class CardScannerOptions(
     companion object CREATOR : Parcelable.Creator<CardScannerOptions> {
 
         enum class ParcelKeys(val value: String) {
-            SCAN_EXPIRY_DATE ("scanExpiryDate"),
+            SCAN_EXPIRY_DATE("scanExpiryDate"),
             SCAN_CARD_HOLDER_NAME("scanCardHolderName"),
             INITIAL_SCAN_TO_DROP("initialScansToDrop"),
             VALID_CARD_TO_SCAN_BEFORE_FINISHING_SCAN("validCardsToScanBeforeFinishingScan"),

@@ -28,7 +28,7 @@ class CardDetailsScanOptimizer(private val _scannerOptions: CardScannerOptions) 
         updateOptimalData()
     }
 
-    private fun isReadyToFinishScan(): Boolean {
+    fun isReadyToFinishScan(): Boolean {
         return numberOfCardDetailsProcessed > _scannerOptions.validCardsToScanBeforeFinishingScan
     }
 

@@ -16,8 +16,8 @@ enum class CardElementType {
 }
 
 enum class CardHolderNameScanPositions(val value: String) {
-    BELOW_CARD_NUMBER ("belowCardNumber"),
-    ABOVE_CARD_NUMBER ("aboveCardNumber")
+    BELOW_CARD_NUMBER("belowCardNumber"),
+    ABOVE_CARD_NUMBER("aboveCardNumber")
 }
 
 class CardNumberScanResult(

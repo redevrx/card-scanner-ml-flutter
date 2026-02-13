@@ -182,7 +182,7 @@ class CardScannerCameraActivity : AppCompatActivity() {
     }
 
     companion object {
-//        private const val TAG = "CameraXBasic"
+        //        private const val TAG = "CameraXBasic"
         private const val REQUEST_CODE_PERMISSIONS = 10
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         const val SCAN_RESULT: String = "scan_result"
@@ -209,7 +209,7 @@ class CardScannerCameraActivity : AppCompatActivity() {
 //        super.onBackPressed()
 //    }
 
-    private fun onBack(){
+    private fun onBack() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             onBackInvokedDispatcher.registerOnBackInvokedCallback(
                 OnBackInvokedDispatcher.PRIORITY_DEFAULT
