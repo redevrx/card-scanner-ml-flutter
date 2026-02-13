@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'dart:async';
 
 import 'package:card_scanner/card_scanner.dart';
 
@@ -37,21 +36,19 @@ class _OptionConfigureWidgetState extends State<OptionConfigureWidget> {
 
   @override
   void initState() {
-    if (widget.initialOptions != null) {
-      final options = widget.initialOptions;
-      scanExpiryDate = options.scanExpiryDate;
-      scanCardHolderName = options.scanCardHolderName;
-      initialScansToDrop = options.initialScansToDrop;
-      validCardsToScanBeforeFinishingScan = options.validCardsToScanBeforeFinishingScan;
-      cardHolderNameBlackListedWords = options.cardHolderNameBlackListedWords;
-      considerPastDatesInExpiryDateScan = options.considerPastDatesInExpiryDateScan;
-      maxCardHolderNameLength = options.maxCardHolderNameLength;
-      enableLuhnCheck = options.enableLuhnCheck;
-      cardScannerTimeOut = options.cardScannerTimeOut;
-      enableDebugLogs = options.enableDebugLogs;
-      possibleCardHolderNamePositions = options.possibleCardHolderNamePositions.toSet();
-    }
-    super.initState();
+    final options = widget.initialOptions;
+    scanExpiryDate = options.scanExpiryDate;
+    scanCardHolderName = options.scanCardHolderName;
+    initialScansToDrop = options.initialScansToDrop;
+    validCardsToScanBeforeFinishingScan = options.validCardsToScanBeforeFinishingScan;
+    cardHolderNameBlackListedWords = options.cardHolderNameBlackListedWords;
+    considerPastDatesInExpiryDateScan = options.considerPastDatesInExpiryDateScan;
+    maxCardHolderNameLength = options.maxCardHolderNameLength;
+    enableLuhnCheck = options.enableLuhnCheck;
+    cardScannerTimeOut = options.cardScannerTimeOut;
+    enableDebugLogs = options.enableDebugLogs;
+    possibleCardHolderNamePositions = options.possibleCardHolderNamePositions.toSet();
+      super.initState();
   }
 
   @override

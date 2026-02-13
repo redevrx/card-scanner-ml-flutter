@@ -34,18 +34,21 @@ data class CardScannerOptions(
     )
 
     constructor(configMap: Map<String, String>) : this(
-        scanExpiryDate = configMap[ParcelKeys.scanExpiryDate.value]?.toBoolean() ?: true,
-        scanCardHolderName = configMap[ParcelKeys.scanCardHolderName.value]?.toBoolean() ?: false,
-        initialScansToDrop = configMap[ParcelKeys.initialScansToDrop.value]?.toInt() ?: 1,
-        validCardsToScanBeforeFinishingScan = configMap[ParcelKeys.validCardsToScanBeforeFinishingScan.value]?.toInt() ?: 11,
-        cardHolderNameBlackListedWords = configMap[ParcelKeys.cardHolderNameBlackListedWords.value]?.split(',') ?: emptyList(),
-        considerPastDatesInExpiryDateScan = configMap[ParcelKeys.considerPastDatesInExpiryDateScan.value]?.toBoolean() ?: false,
-        maxCardHolderNameLength = configMap[ParcelKeys.maxCardHolderNameLength.value]?.toInt() ?: 26,
-        enableLuhnCheck = configMap[ParcelKeys.enableLuhnCheck.value]?.toBoolean() ?: true,
-        cardScannerTimeOut = configMap[ParcelKeys.cardScannerTimeOut.value]?.toInt() ?: 0,
-        enableDebugLogs = configMap[ParcelKeys.enableDebugLogs.value]?.toBoolean() ?: false,
-        possibleCardHolderNamePositions = configMap[ParcelKeys.possibleCardHolderNamePositions.value]?.split(',')
-            ?: listOf(CardHolderNameScanPositions.belowCardNumber.value)
+        scanExpiryDate = configMap[ParcelKeys.SCAN_EXPIRY_DATE.value]?.toBoolean() ?: true,
+        scanCardHolderName = configMap[ParcelKeys.SCAN_CARD_HOLDER_NAME.value]?.toBoolean() ?: false,
+        initialScansToDrop = configMap[ParcelKeys.INITIAL_SCAN_TO_DROP.value]?.toInt() ?: 1,
+        validCardsToScanBeforeFinishingScan = configMap[ParcelKeys.VALID_CARD_TO_SCAN_BEFORE_FINISHING_SCAN.value]?.toInt()
+            ?: 11,
+        cardHolderNameBlackListedWords = configMap[ParcelKeys.CardHolderNameBlackListedWords.value]?.split(',')
+            ?: emptyList(),
+        considerPastDatesInExpiryDateScan = configMap[ParcelKeys.ConsiderPastDatesInExpiryDateScan.value]?.toBoolean()
+            ?: false,
+        maxCardHolderNameLength = configMap[ParcelKeys.MaxCardHolderNameLength.value]?.toInt() ?: 26,
+        enableLuhnCheck = configMap[ParcelKeys.EnableLuhnCheck.value]?.toBoolean() ?: true,
+        cardScannerTimeOut = configMap[ParcelKeys.CardScannerTimeOut.value]?.toInt() ?: 0,
+        enableDebugLogs = configMap[ParcelKeys.EnableDebugLogs.value]?.toBoolean() ?: false,
+        possibleCardHolderNamePositions = configMap[ParcelKeys.PossibleCardHolderNamePositions.value]?.split(',')
+            ?: listOf(CardHolderNameScanPositions.BELOW_CARD_NUMBER.value)
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -53,13 +56,13 @@ data class CardScannerOptions(
         parcel.writeByte(if (scanCardHolderName) 1 else 0)
         parcel.writeInt(initialScansToDrop)
         parcel.writeInt(validCardsToScanBeforeFinishingScan)
-        parcel.writeStringList(cardHolderNameBlackListedWords ?: emptyList())
+        parcel.writeStringList(cardHolderNameBlackListedWords)
         parcel.writeByte(if (considerPastDatesInExpiryDateScan) 1 else 0)
         parcel.writeInt(maxCardHolderNameLength)
         parcel.writeByte(if (enableLuhnCheck) 1 else 0)
         parcel.writeInt(cardScannerTimeOut)
         parcel.writeByte(if (enableDebugLogs) 1 else 0)
-        parcel.writeStringList(possibleCardHolderNamePositions ?: emptyList())
+        parcel.writeStringList(possibleCardHolderNamePositions)
     }
 
     override fun describeContents(): Int {
@@ -69,17 +72,17 @@ data class CardScannerOptions(
     companion object CREATOR : Parcelable.Creator<CardScannerOptions> {
 
         enum class ParcelKeys(val value: String) {
-            scanExpiryDate("scanExpiryDate"),
-            scanCardHolderName("scanCardHolderName"),
-            initialScansToDrop("initialScansToDrop"),
-            validCardsToScanBeforeFinishingScan("validCardsToScanBeforeFinishingScan"),
-            cardHolderNameBlackListedWords("cardHolderNameBlackListedWords"),
-            considerPastDatesInExpiryDateScan("considerPastDatesInExpiryDateScan"),
-            maxCardHolderNameLength("maxCardHolderNameLength"),
-            enableLuhnCheck("enableLuhnCheck"),
-            cardScannerTimeOut("cardScannerTimeOut"),
-            enableDebugLogs("enableDebugLogs"),
-            possibleCardHolderNamePositions("possibleCardHolderNamePositions")
+            SCAN_EXPIRY_DATE ("scanExpiryDate"),
+            SCAN_CARD_HOLDER_NAME("scanCardHolderName"),
+            INITIAL_SCAN_TO_DROP("initialScansToDrop"),
+            VALID_CARD_TO_SCAN_BEFORE_FINISHING_SCAN("validCardsToScanBeforeFinishingScan"),
+            CardHolderNameBlackListedWords("cardHolderNameBlackListedWords"),
+            ConsiderPastDatesInExpiryDateScan("considerPastDatesInExpiryDateScan"),
+            MaxCardHolderNameLength("maxCardHolderNameLength"),
+            EnableLuhnCheck("enableLuhnCheck"),
+            CardScannerTimeOut("cardScannerTimeOut"),
+            EnableDebugLogs("enableDebugLogs"),
+            PossibleCardHolderNamePositions("possibleCardHolderNamePositions")
         }
 
         override fun createFromParcel(parcel: Parcel): CardScannerOptions {

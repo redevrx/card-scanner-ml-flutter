@@ -3,14 +3,10 @@ package com.nateshmbhat.card_scanner;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-
+import android.os.Build;
 import androidx.annotation.NonNull;
-
 import com.nateshmbhat.card_scanner.scanner_core.models.CardDetails;
 import com.nateshmbhat.card_scanner.scanner_core.models.CardScannerOptions;
-
-import java.util.Map;
-
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.embedding.engine.plugins.activity.ActivityAware;
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
@@ -19,6 +15,8 @@ import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry;
+
+import java.util.Map;
 
 /**
  * CardScannerPlugin
@@ -79,6 +77,11 @@ public class CardScannerPlugin implements FlutterPlugin, MethodCallHandler, Acti
     }
 
     void showCameraActivity(MethodCall call) {
+        if (!(call.arguments instanceof Map)) {
+            return;
+        }
+
+        @SuppressWarnings("unchecked")
         Map<String, String> map = (Map<String, String>) call.arguments;
         CardScannerOptions cardScannerOptions = new CardScannerOptions(map);
         Intent intent = new Intent(context, CardScannerCameraActivity.class);
@@ -91,7 +94,9 @@ public class CardScannerPlugin implements FlutterPlugin, MethodCallHandler, Acti
         if (requestCode == SCAN_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 if (data != null && data.hasExtra(CardScannerCameraActivity.SCAN_RESULT)) {
-                    CardDetails cardDetails = data.getParcelableExtra(CardScannerCameraActivity.SCAN_RESULT);
+                    CardDetails cardDetails = getParcelableExtraCompat(
+                            data
+                    );
                     pendingResult.success(cardDetails.toMap());
                 } else {
                     pendingResult.success(null);
@@ -104,6 +109,16 @@ public class CardScannerPlugin implements FlutterPlugin, MethodCallHandler, Acti
             return true;
         } else return false;
     }
+
+    @SuppressWarnings("deprecation")
+    private CardDetails getParcelableExtraCompat(Intent intent) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            return intent.getParcelableExtra(CardScannerCameraActivity.SCAN_RESULT, CardDetails.class);
+        } else {
+            return intent.getParcelableExtra(CardScannerCameraActivity.SCAN_RESULT);
+        }
+    }
+
 
     @Override
     public void onAttachedToActivity(@NonNull ActivityPluginBinding binding) {

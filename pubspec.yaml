@@ -6,7 +6,6 @@ repository: https://github.com/nateshmbhat/card-scanner-flutter
 
 environment:
   sdk: '>=3.0.3 <4.0.0'
-  flutter: ">=1.10.0"
 
 dependencies:
   flutter:

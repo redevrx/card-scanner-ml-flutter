@@ -2,31 +2,48 @@ package com.nateshmbhat.card_scanner.scanner_core.models
 
 import com.google.mlkit.vision.text.Text
 
-open class ScanFilterResult(val visionText: Text, val textBlockIndex: Int, val textBlock: Text.TextBlock, val data: ScanResultData)
+open class ScanFilterResult(
+    val visionText: Text,
+    val textBlockIndex: Int,
+    val textBlock: Text.TextBlock,
+    val data: ScanResultData
+)
 
 class ScanResultData(val data: String, val elementType: CardElementType)
 
 enum class CardElementType {
-  cardNumber, expiryDate, cardHolderName
+    CARD_NUMBER, EXPIRY_DATE, CARD_HOLDER_NAME
 }
 
 enum class CardHolderNameScanPositions(val value: String) {
-  belowCardNumber("belowCardNumber"),
-  aboveCardNumber("aboveCardNumber")
+    BELOW_CARD_NUMBER ("belowCardNumber"),
+    ABOVE_CARD_NUMBER ("aboveCardNumber")
 }
 
-class CardNumberScanResult(visionText: Text, textBlockIndex: Int, textBlock: Text.TextBlock,
-                           val cardNumber: String) : ScanFilterResult(visionText, textBlockIndex,
-        textBlock, data = ScanResultData(cardNumber, CardElementType.cardNumber))
+class CardNumberScanResult(
+    visionText: Text, textBlockIndex: Int, textBlock: Text.TextBlock,
+    val cardNumber: String
+) : ScanFilterResult(
+    visionText, textBlockIndex,
+    textBlock, data = ScanResultData(cardNumber, CardElementType.CARD_NUMBER)
+)
 
-class ExpiryDateScanResult(visionText: Text, textBlockIndex: Int, textBlock: Text.TextBlock,
-                           val expiryDate: String) : ScanFilterResult(visionText, textBlockIndex,
-        textBlock, data = ScanResultData(expiryDate, CardElementType.expiryDate))
+class ExpiryDateScanResult(
+    visionText: Text, textBlockIndex: Int, textBlock: Text.TextBlock,
+    val expiryDate: String
+) : ScanFilterResult(
+    visionText, textBlockIndex,
+    textBlock, data = ScanResultData(expiryDate, CardElementType.EXPIRY_DATE)
+)
 
-class CardHolderNameScanResult(visionText: Text, textBlockIndex: Int, textBlock: Text.TextBlock,
-                               val cardHolderName: String) : ScanFilterResult(visionText, textBlockIndex,
-        textBlock, data = ScanResultData(cardHolderName, CardElementType.cardHolderName))
+class CardHolderNameScanResult(
+    visionText: Text, textBlockIndex: Int, textBlock: Text.TextBlock,
+    val cardHolderName: String
+) : ScanFilterResult(
+    visionText, textBlockIndex,
+    textBlock, data = ScanResultData(cardHolderName, CardElementType.CARD_HOLDER_NAME)
+)
 
 abstract class ScanFilter(val visionText: Text, val scannerOptions: CardScannerOptions) {
-  abstract fun filter(): ScanFilterResult?
+    abstract fun filter(): ScanFilterResult?
 }

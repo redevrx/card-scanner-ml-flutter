@@ -1,3 +1,10 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
@@ -21,9 +28,9 @@ if (flutterVersionName == null) {
     flutterVersionName = '2.0'
 }
 
-apply plugin: 'kotlin-android'
-apply plugin: 'com.android.application'
-apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+//apply plugin: 'kotlin-android'
+//apply plugin: 'com.android.application'
+//apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 def keystoreProperties = new Properties()
 def keystorePropertiesFile = rootProject.file('key.properties')
@@ -32,8 +39,9 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    compileSdkVersion 34
+    compileSdkVersion 36
     namespace 'com.nateshmbhat.card_scanner_example'
+    ndkVersion = "28.2.13676358"//NDK version r28 and higher compile 16 KB-aligned by default.
     lintOptions {
         disable 'InvalidPackage'
     }
@@ -74,7 +82,6 @@ android {
     kotlinOptions {
         jvmTarget = '11'
     }
-
 
 }
 
