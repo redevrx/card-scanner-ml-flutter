@@ -1,22 +1,18 @@
 group 'com.nateshmbhat.card_scanner'
 version '1.0'
 
-buildscript {
-//    ext {
-////        kotlin_version = "1.5.20"
-//        kotlin_version = "2.3.0"
+//buildscript {
+//    ext.kotlin_version = "1.5.31"
+//    repositories {
+//        google()
+//        mavenCentral()
 //    }
-    ext.kotlin_version = "1.5.31"
-    repositories {
-        google()
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath("com.android.tools.build:gradle:8.11.1")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
-    }
-}
+//
+//    dependencies {
+//        classpath("com.android.tools.build:gradle:8.11.1")
+//        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
+//    }
+//}
 
 rootProject.allprojects {
     repositories {
@@ -51,7 +47,7 @@ android {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.5.31"
     implementation 'androidx.appcompat:appcompat:1.7.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
     implementation 'com.google.android.gms:play-services-mlkit-text-recognition:19.0.1'
